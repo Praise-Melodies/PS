@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Header from "./components/Header";
 import SongsList from "./components/SongsList";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
@@ -112,6 +113,8 @@ function App() {
 
           {/* SongsList component with selected song */}
           <SongsList song={selectedSong} />
+
+          <Footer/>
         </main>
       </div>
     </>
