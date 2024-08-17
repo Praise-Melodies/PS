@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './TransliteratedSong.css'; // Import custom CSS for animations
+import "./TransliteratedSong.css"; // Import custom CSS for animations
 
 const TransliteratedSong = ({ song: arSong }) => {
   const { songID } = arSong;
@@ -11,7 +11,9 @@ const TransliteratedSong = ({ song: arSong }) => {
   useEffect(() => {
     const fetchSong = async () => {
       try {
-        const response = await axios.get(`/api/FrankSongs/getFrankSongBySongID/${songID}`);
+        const response = await axios.get(
+          `/api/FrankSongs/getFrankSongBySongID/${songID}`
+        );
         setSong(response.data);
       } catch (error) {
         console.error("Error fetching song data:", error);
@@ -40,24 +42,29 @@ const TransliteratedSong = ({ song: arSong }) => {
       <div className="px-4">
         {Array.isArray(song.chorus) && (
           <div className="text-left">
-              {song.chorus.map((line, index) => (
-                <p
-                  key={index}
-                  className={`text-[#E0E0E0] p-4 my-2 rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform relative ${
-                    activeVerseIndex === -1 && activeLineIndex === index
-                      ? "active-item"
-                      : "hover:bg-[#404448]"
-                  }`}
-                  onClick={() => handleClick(-1, index)}
-                >
-                  {line.split("\n").map((subLine, subIndex) => (
-                    <p key={`${line}-${subIndex}`}>
-                      {subLine.trim() !== "" ? subLine : <br />}
-                    </p>
-                  ))}
-                </p>
-              ))}
-            </div>
+            {song.chorus.map((line, index) => (
+              <div
+                key={index}
+                className={`text-[#E0E0E0] p-4 my-2 rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform relative ${
+                  activeVerseIndex === -1 && activeLineIndex === index
+                    ? "active-item"
+                    : "hover:bg-[#404448]"
+                }`}
+                onClick={() => handleClick(-1, index)}
+              >
+                {line.split("\n").map((subLine, subIndex) => (
+                  <p key={`${line}-${subIndex}`}>
+                    {subLine.trim() !== "" ? subLine : <br />}
+                  </p>
+                ))}
+                {activeVerseIndex === -1 && activeLineIndex === index && (
+                  <div className="absolute z-10 right-[-3px] bottom-[-15px] transform -translate-y-1/2 bg-[#FFBB02] text-white text-xs px-2 py-1 rounded-full">
+                    Showing Now
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         )}
 
         {Array.isArray(song.verses) &&
@@ -66,7 +73,8 @@ const TransliteratedSong = ({ song: arSong }) => {
               <div
                 key={`${verseIndex}-${lineIndex}`}
                 className={`text-[#E0E0E0] text-left my-2 rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform relative ${
-                  activeVerseIndex === verseIndex && activeLineIndex === lineIndex
+                  activeVerseIndex === verseIndex &&
+                  activeLineIndex === lineIndex
                     ? "active-item"
                     : "hover:bg-[#404448]"
                 }`}
@@ -83,11 +91,12 @@ const TransliteratedSong = ({ song: arSong }) => {
                       {subLine.trim() !== "" ? subLine : <br />}
                     </p>
                   ))}
-                  {activeVerseIndex === verseIndex && activeLineIndex === lineIndex && (
-                    <div className="absolute z-10 right-[-3px] bottom-[-15px] transform -translate-y-1/2 bg-[#FFBB02] text-white text-xs px-2 py-1 rounded-full">
-                      Showing Now
-                    </div>
-                  )}
+                  {activeVerseIndex === verseIndex &&
+                    activeLineIndex === lineIndex && (
+                      <div className="absolute z-10 right-[-3px] bottom-[-15px] transform -translate-y-1/2 bg-[#FFBB02] text-white text-xs px-2 py-1 rounded-full">
+                        Showing Now
+                      </div>
+                    )}
                 </div>
               </div>
             ))

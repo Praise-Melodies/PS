@@ -59,7 +59,7 @@ const TranslatedSong = ({ song }) => {
         {Array.isArray(englishSong.chorus) && (
           <div className="text-left">
             {englishSong.chorus.map((line, index) => (
-              <p
+              <div
                 key={index}
                 className={`text-[#E0E0E0] p-4 my-2 rounded-lg cursor-pointer transition-transform duration-300 ease-in-out transform relative ${
                   activeVerseIndex === -1 && activeLineIndex === index
@@ -73,7 +73,12 @@ const TranslatedSong = ({ song }) => {
                     {subLine.trim() !== "" ? subLine : <br />}
                   </p>
                 ))}
-              </p>
+                {activeVerseIndex === -1 && activeLineIndex === index && (
+                  <div className="absolute z-10 right-[-3px] bottom-[-15px] transform -translate-y-1/2 bg-[#FFBB02] text-white text-xs px-2 py-1 rounded-full">
+                    Showing Now
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}

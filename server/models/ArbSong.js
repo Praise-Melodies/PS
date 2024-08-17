@@ -50,7 +50,7 @@ const ArbSongSchema = new mongoose.Schema({
     type: Number,
   },
   poppular: {
-    type: boolean,
+    type: Boolean,
   },
 });
 
