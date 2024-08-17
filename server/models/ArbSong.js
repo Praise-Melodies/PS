@@ -31,6 +31,27 @@ const ArbSongSchema = new mongoose.Schema({
   englishTranslatedVerses: {
     type: [[String]], // Add field for translated verses (array of arrays of strings)
   },
+  artist: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+  chordImage: {
+    type: String,
+  },
+  duration:{
+    type: String,
+  },
+  likes: {
+    type: Number,
+  },
+  poppular: {
+    type: boolean,
+  },
 });
 
 // Create the model for ArbSong and specify the collection name explicitly
